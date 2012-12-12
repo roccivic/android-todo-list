@@ -59,13 +59,11 @@ public class Activity_Add extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
     	if (requestCode == REQUEST.EDIT && resultCode == RESPONSE.MODIFIED) {
 	        item = (Item) intent.getSerializableExtra("item");
-			update(resultCode);
-			finish();
     	} else if (requestCode == REQUEST.ADD && resultCode == RESPONSE.ADDED) {
 	        item = (Item) intent.getSerializableExtra("item");
-			update(resultCode);
-			finish();
 		}
+		update(resultCode);
+		finish();
     }
 
 }

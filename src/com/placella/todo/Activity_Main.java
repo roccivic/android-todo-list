@@ -110,9 +110,9 @@ public class Activity_Main extends Activity {
 						Item i = todo.find(arg0.getTag());
 						Class<?> target;
 						if (i.getType() == Item.NOTE) {
-							target = Activity_EditNote.class;
+							target = Activity_ViewNote.class;
 						} else {
-							target = Activity_EditList.class;
+							target = Activity_ViewList.class;
 						}
 				        Bundle b = new Bundle();
 				        b.putInt("action", REQUEST.EDIT);

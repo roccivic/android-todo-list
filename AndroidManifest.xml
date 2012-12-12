@@ -25,6 +25,8 @@
         <activity android:name="com.placella.todo.Activity_EditNote"></activity>
         <activity android:name="com.placella.todo.Activity_EditList"></activity>
         <activity android:name="com.placella.todo.Activity_Add"></activity>
+        <activity android:name="com.placella.todo.Activity_ViewNote"></activity>
+        <activity android:name="com.placella.todo.Activity_ViewList"></activity>
     </application>
 
 </manifest>

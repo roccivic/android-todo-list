@@ -24,4 +24,7 @@
     <string name="additem">Add Item</string>
     <string name="noitems">No Items found, click \&quot;Add Item\&quot; to create a new item</string>
     <string name="dberror">A fatal database error has occured</string>
+    <string name="back">Back</string>
+    <string name="edit">Edit</string>
+    <string name="PLACEHOLDER">PLACEHOLDER</string>
 </resources>

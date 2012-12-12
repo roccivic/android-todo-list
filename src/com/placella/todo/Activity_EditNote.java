@@ -86,7 +86,7 @@ public class Activity_EditNote extends Activity implements Savable {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		if (mode == REQUEST.EDIT) {
-			getMenuInflater().inflate(R.menu.activity_editnote, menu);
+			getMenuInflater().inflate(R.menu.activity_edit, menu);
 		} else {
 			getMenuInflater().inflate(R.menu.activity_default, menu);
 		}
