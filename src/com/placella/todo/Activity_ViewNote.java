@@ -72,6 +72,8 @@ public class Activity_ViewNote extends Activity {
 	        Intent intent = new Intent(self, Activity_EditNote.class);
 	        intent.putExtras(b);
 	        startActivityForResult(intent, REQUEST.EDIT);
+        } else {
+            Util.defaultMenuHandler(self, i);
         }
         return super.onOptionsItemSelected(i);
     }

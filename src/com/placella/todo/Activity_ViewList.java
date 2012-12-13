@@ -110,6 +110,8 @@ public class Activity_ViewList extends Activity {
 	        Intent intent = new Intent(self, Activity_EditList.class);
 	        intent.putExtras(b);
 	        startActivityForResult(intent, REQUEST.EDIT);
+        } else {
+            Util.defaultMenuHandler(self, i);
         }
         return super.onOptionsItemSelected(i);
     }

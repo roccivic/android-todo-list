@@ -1,6 +1,7 @@
 package com.placella.todo;
 
-import android.app.*;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
 
 /**
@@ -17,7 +18,7 @@ public class Dialog_Message {
      * @param context Context for the dialog
      * @param message A reference to the string resource to display
      */
-    public Dialog_Message(Activity context, int message) {
+    public Dialog_Message(Context context, int message) {
 		init(context, null);
         builder.setMessage(message);
     }
@@ -28,7 +29,7 @@ public class Dialog_Message {
      * @param message A reference to the string resource to display
      * @param callback What to do when user presses OK
      */
-    public Dialog_Message(Activity context, int message, OnClickListener callback) {
+    public Dialog_Message(Context context, int message, OnClickListener callback) {
 		init(context, callback);
         builder.setMessage(message);
     }
@@ -38,7 +39,7 @@ public class Dialog_Message {
      * @param context Context for the dialog
      * @param message The string to display
      */
-    public Dialog_Message(Activity context, String message) {
+    public Dialog_Message(Context context, String message) {
 		init(context, null);
         builder.setMessage(message);
     }
@@ -49,7 +50,7 @@ public class Dialog_Message {
      * @param message The string to display
      * @param callback What to do when user presses OK
      */
-    public Dialog_Message(Activity context, String message, OnClickListener callback) {
+    public Dialog_Message(Context context, String message, OnClickListener callback) {
 		init(context, callback);
         builder.setMessage(message);
     }
@@ -59,7 +60,7 @@ public class Dialog_Message {
      * @param context Context for the dialog
      * @param callback What to do when user presses OK
      */
-    private void init(Activity context, OnClickListener callback)
+    private void init(Context context, OnClickListener callback)
     {
     	builder = new AlertDialog.Builder(context);
         builder.setPositiveButton(R.string.ok, callback);

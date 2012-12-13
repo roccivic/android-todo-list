@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -55,6 +56,11 @@ public class Activity_Add extends Activity {
 		getMenuInflater().inflate(R.menu.activity_default, menu);
 		return true;
 	}
+	
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Util.defaultMenuHandler(self, item);
+        return super.onOptionsItemSelected(item);
+    }
     
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
     	if (requestCode == REQUEST.EDIT && resultCode == RESPONSE.MODIFIED) {

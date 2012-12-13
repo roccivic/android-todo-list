@@ -103,6 +103,8 @@ public class Activity_EditNote extends Activity implements Savable {
 					finish();
 				}
 			}).show();
+        } else {
+            Util.defaultMenuHandler(self, item);
         }
         return super.onOptionsItemSelected(item);
     }

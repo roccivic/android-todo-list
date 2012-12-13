@@ -15,4 +15,9 @@ public class Util {
 			)
 		);
 	}
+	public static void defaultMenuHandler(Context context, MenuItem i) {
+		if (i.getItemId() == R.id.menu_about) {
+			new Dialog_Message(context, R.string.about).show();
+	    }
+	}
 }

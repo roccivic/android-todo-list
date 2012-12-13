@@ -1,6 +1,6 @@
 package com.placella.todo;
 
-import android.app.*;
+import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
 import android.view.View;
 
@@ -18,7 +18,7 @@ public class Dialog_Confirm extends Dialog_Message {
      * @param message A reference to the string resource to display
      * @param callback What to do when user presses OK
      */
-    public Dialog_Confirm(Activity context, int message, OnClickListener callback) {
+    public Dialog_Confirm(Context context, int message, OnClickListener callback) {
     	super(context, message, callback);
     	init();
     }
@@ -29,7 +29,7 @@ public class Dialog_Confirm extends Dialog_Message {
      * @param message The string to display
      * @param callback What to do when user presses OK
      */
-    public Dialog_Confirm(Activity context, String message, OnClickListener callback) {
+    public Dialog_Confirm(Context context, String message, OnClickListener callback) {
     	super(context, message, callback);
     	init();
     }

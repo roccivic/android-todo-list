@@ -172,6 +172,8 @@ public class Activity_Main extends Activity {
 	        startActivityForResult(intent, REQUEST.ADD);
         } else if (item.getItemId() == R.id.menu_sync) {
         	new Dialog_Message(self, createJson()).show();
+        } else {
+        	Util.defaultMenuHandler(self, item);
         }
         return super.onOptionsItemSelected(item);
     }
