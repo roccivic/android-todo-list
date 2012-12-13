@@ -28,7 +28,8 @@ public class Db extends SQLiteOpenHelper {
         	"CREATE TABLE items"
         	+ "("
 	        	+ "lid INTEGER,"
-	        	+ "content TEXT"
+	        	+ "content TEXT,"
+	        	+ "checked INTEGER"
         	+ ");"
         );
     }
@@ -79,6 +80,7 @@ public class Db extends SQLiteOpenHelper {
 	    	    values = new ContentValues();
 	    	    values.put("lid", lid);
 	    	    values.put("content", i.getName());
+	    	    values.put("checked", i.getState());
 	    	    retval = db.insert("items", null, values);
 	    	    if (retval == -1) {
 	    	    	throw new Exception("Can't insert into db.list");
@@ -115,11 +117,14 @@ public class Db extends SQLiteOpenHelper {
 				);
 				List<Item> innerList = new ArrayList<Item>();
 				if (c.getInt(2) == Item.LIST) {
-					Cursor cc = db.rawQuery("SELECT content FROM items WHERE lid = '" + c.getInt(4) + "'", null);
+					Cursor cc = db.rawQuery(
+						"SELECT content, checked FROM items WHERE lid = '" + c.getInt(4) + "'",
+						null
+					);
 				    if (cc.moveToFirst()) {      
 						do {
 							innerList.add(
-								new Item(cc.getString(0), Item.NOTE)
+								new Item(cc.getString(0), Item.NOTE).setState(cc.getInt(1))
 							);
 						} while (cc.moveToNext());
 				    }

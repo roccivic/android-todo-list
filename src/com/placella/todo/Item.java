@@ -8,12 +8,16 @@ public class Item implements Serializable {
 	private static int ai = 0;
 	public final static int NOTE = 0;
 	public final static int LIST = 1;
+	public final static int UNCHECKED = 0;
+	public final static int CHECKED = 1;
 	private int type;
 	private String name;
 	private long id;
 	private List<Item> listcontent;
 	private String notecontent;
+	private int state;
 	public Item(String name, int type) {
+		this.setState(UNCHECKED);
 		this.setType(type);
 		this.setName(name);
 		this.setId(Item.ai++);
@@ -48,6 +52,13 @@ public class Item implements Serializable {
 	}
 	public Item setNotecontent(String notecontent) {
 		this.notecontent = notecontent;
+		return this;
+	}
+	public int getState() {
+		return state;
+	}
+	public Item setState(int state) {
+		this.state = state;
 		return this;
 	}
 }

@@ -1,5 +1,7 @@
 package com.placella.todo;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,6 +12,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -29,9 +33,28 @@ public class Activity_ViewList extends Activity {
 		t.setText(item.getName());
 		
 		TableLayout table = (TableLayout) findViewById(R.id.content);
+		int count = 0;
 		for (Item i : item.getListcontent()) {
 			TableRow tr = new TableRow(self);
 			CheckBox x = new CheckBox(self);
+			if (i.getState() == Item.CHECKED) {
+				x.setChecked(true);
+			}
+			x.setTag(count);
+			x.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(CompoundButton arg0, boolean newState) {
+					List<Item> list = item.getListcontent();
+					Item i = list.get(Integer.parseInt(arg0.getTag().toString()));
+					if (newState) {
+						i.setState(Item.CHECKED);
+					} else {
+						i.setState(Item.UNCHECKED);
+					}
+					item.setListcontent(list);
+					update(RESPONSE.MODIFIED);
+				}
+			});
 			tr.addView(x);
 			t = new TextView(self);
 			t.setPadding(10, 5, 10, 5);
@@ -39,6 +62,7 @@ public class Activity_ViewList extends Activity {
 			t.setTextSize(18);
 			tr.addView(t);
 			table.addView(tr);
+			count++;
 		}
 		
 		update(RESPONSE.CANCELLED);
