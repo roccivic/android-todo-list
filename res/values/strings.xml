@@ -23,10 +23,11 @@
     <string name="addlist">Add List</string>
     <string name="additem">Add Item</string>
     <string name="noitems">No Items found, click \&quot;Add Item\&quot; to create a new item</string>
-    <string name="dberror">A fatal database error has occured</string>
+    <string name="dberror">A fatal database error has occurred</string>
     <string name="back">Back</string>
     <string name="edit">Edit</string>
     <string name="PLACEHOLDER">PLACEHOLDER</string>
     <string name="noname">{No name}</string>
     <string name="sync">Synchronise</string>
+    <string name="view">View</string>
 </resources>

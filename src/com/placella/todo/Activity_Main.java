@@ -6,8 +6,10 @@ import org.json.*;
 
 import android.os.*;
 import android.app.*;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.*;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.ViewGroup.LayoutParams;
 import android.view.View.*;
 import android.widget.*;
@@ -16,6 +18,7 @@ public class Activity_Main extends Activity {
 	private final ToDoList todo = new ToDoList(this);
 	private final Activity_Main self = this;
 	private final int dataListId = 0x00ffff00;
+	private Item currentItem;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -123,21 +126,10 @@ public class Activity_Main extends Activity {
 	            innerLayout.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View arg0) {
-						Item i = todo.find(arg0.getTag());
-						Class<?> target;
-						if (i.getType() == Item.NOTE) {
-							target = Activity_ViewNote.class;
-						} else {
-							target = Activity_ViewList.class;
-						}
-				        Bundle b = new Bundle();
-				        b.putInt("action", REQUEST.EDIT);
-				        b.putSerializable("item", i);
-				        Intent intent = new Intent(self, target);
-				        intent.putExtras(b);
-				        startActivityForResult(intent, REQUEST.EDIT);
+						viewItem(todo.find(arg0.getTag()));
 					}
 				});
+	            registerForContextMenu(innerLayout);
 	            innerLayout.addView(b);
 	            l.addView(innerLayout);
 				Util.hr(l, this);
@@ -218,5 +210,58 @@ public class Activity_Main extends Activity {
         s.addView(getList());
     	l.addView(s);
     }
-
+    
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {  
+    	super.onCreateContextMenu(menu, v, menuInfo);
+		getMenuInflater().inflate(R.menu.context_main, menu);
+        currentItem = todo.find(v.getTag());
+    }  
+    
+    @Override  
+    public boolean onContextItemSelected(MenuItem item) {  
+        if(item.getItemId() == R.id.menu_view){
+			viewItem(currentItem);
+        	return true;  
+        } else if(item.getItemId() == R.id.menu_edit){
+    		Class<?> target;
+    		if (currentItem.getType() == Item.NOTE) {
+    			target = Activity_EditNote.class;
+    		} else {
+    			target = Activity_EditList.class;
+    		}
+	        Bundle b = new Bundle();
+	        b.putInt("action", REQUEST.EDIT);
+	        b.putSerializable("item", currentItem);
+	        Intent intent = new Intent(self, target);
+	        intent.putExtras(b);
+	        startActivityForResult(intent, REQUEST.EDIT);
+        	return true;  
+        } else if(item.getItemId() == R.id.menu_delete){
+			new Dialog_Confirm(self, R.string.confirm, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					todo.delete(currentItem);
+					refresh();
+				}
+			}).show();
+        	return true;  
+        } else {
+        	return false;
+        }  
+    }  
+    
+    public void viewItem(Item i) {
+		Class<?> target;
+		if (i.getType() == Item.NOTE) {
+			target = Activity_ViewNote.class;
+		} else {
+			target = Activity_ViewList.class;
+		}
+        Bundle b = new Bundle();
+        b.putInt("action", REQUEST.EDIT);
+        b.putSerializable("item", i);
+        Intent intent = new Intent(self, target);
+        intent.putExtras(b);
+        startActivityForResult(intent, REQUEST.EDIT);
+    }
 }
