@@ -2,6 +2,8 @@ package com.placella.todo;
 
 import java.util.List;
 
+import org.json.*;
+
 import android.os.*;
 import android.app.*;
 import android.content.Intent;
@@ -166,6 +168,8 @@ public class Activity_Main extends Activity {
 	        Intent intent = new Intent(self, Activity_Add.class);
 	        intent.putExtras(b);
 	        startActivityForResult(intent, REQUEST.ADD);
+        } else if (item.getItemId() == R.id.menu_sync) {
+        	new Dialog_Message(self, createJson()).show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -175,6 +179,30 @@ public class Activity_Main extends Activity {
         super.onPause();
     	this.todo.close();
     }
+	
+	public String createJson() {
+    	JSONArray root = new JSONArray();
+        try {
+        	for (Item i : todo.getList()) {
+                JSONObject itemObj = new JSONObject();
+                itemObj.put("name", i.getName());
+                itemObj.put("type", i.getType());
+                itemObj.put("note", i.getNotecontent());
+            	JSONArray array = new JSONArray();
+            	for (Item inner : i.getListcontent()) {
+                    JSONObject innerObj = new JSONObject();
+            		innerObj.put("txt", inner.getName());
+            		innerObj.put("sel", inner.getState());
+            		array.put(innerObj);
+            	}
+            	itemObj.put("list", array);
+            	root.put(itemObj);
+        	}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+        return root.toString();
+	}
     
     public void refresh() {
 	    LinearLayout l = (LinearLayout) findViewById(dataListId);
