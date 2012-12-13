@@ -2,7 +2,5 @@
     <item android:id="@+id/menu_view" android:orderInCategory="1" android:title="@string/view"></item>
     <item android:id="@+id/menu_edit" android:orderInCategory="2" android:title="@string/edit"></item>
     <item android:id="@+id/menu_delete" android:orderInCategory="3" android:title="@string/delete"></item>
-    <item android:id="@+id/cancel" android:title="@string/cancel" android:orderInCategory="4"></item>
-    
-
+    <item android:id="@+id/menu_cancel" android:title="@string/cancel" android:orderInCategory="4"></item>
 </menu>

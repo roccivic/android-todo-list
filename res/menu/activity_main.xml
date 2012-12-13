@@ -1,11 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
-    <item
-        android:id="@+id/menu_about"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/about"/>
-    <item android:id="@+id/menu_add" android:orderInCategory="1" android:title="@string/add"></item>
-    <item android:id="@+id/menu_sync" android:title="@string/sync"></item>
-
+    <item android:id="@+id/menu_add" android:orderInCategory="1" android:title="@string/add" android:icon="@drawable/ic_menu_add"></item>
+    <group android:id="@+id/menu_remote" android:orderInCategory="2">
+        <item android:id="@+id/menu_sync" android:title="@string/sync" android:icon="@drawable/ic_menu_sync"></item>
+    </group>
+    <item android:id="@+id/menu_about" android:orderInCategory="3" android:title="@string/about" android:icon="@drawable/ic_menu_about"></item>
 </menu>

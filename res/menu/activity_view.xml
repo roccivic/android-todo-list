@@ -1,6 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/menu_delete" android:orderInCategory="1" android:title="@string/delete"></item>
-    <item android:id="@+id/menu_about" android:title="@string/about"></item>
-    <item android:id="@+id/menu_edit" android:title="@string/edit"></item>
-
+    <item android:id="@+id/menu_delete" android:orderInCategory="2" android:title="@string/delete" android:icon="@drawable/ic_menu_delete"></item>
+    <item android:id="@+id/menu_edit" android:title="@string/edit" android:orderInCategory="1" android:icon="@drawable/ic_note"></item>
+    <item android:id="@+id/menu_about" android:title="@string/about" android:orderInCategory="3"  android:icon="@drawable/ic_menu_about"></item>
 </menu>

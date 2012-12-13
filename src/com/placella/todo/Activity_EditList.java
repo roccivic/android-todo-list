@@ -113,7 +113,7 @@ public class Activity_EditList extends Activity implements Savable {
 		    	il.addView(t);
 		    	
 		    	ImageButton ib = new ImageButton(self);
-		    	ib.setImageResource(R.drawable.ic_trash_unselected);
+		    	ib.setImageResource(R.drawable.ic_delete_small);
 	            ib.setLayoutParams(
                     new LayoutParams( // FIXME: top part of the button is getting cut off
                 		50, 50 // Values obtained by trial and error.

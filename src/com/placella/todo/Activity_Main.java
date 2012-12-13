@@ -149,7 +149,17 @@ public class Activity_Main extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return true;
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		if(todo.getList().size() > 0) {
+			menu.setGroupVisible(R.id.menu_remote, true);
+		} else {
+			menu.setGroupVisible(R.id.menu_remote, false);
+		}
+		return super.onPrepareOptionsMenu(menu);
 	}
 	
 	@Override
