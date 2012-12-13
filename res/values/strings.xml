@@ -27,4 +27,6 @@
     <string name="back">Back</string>
     <string name="edit">Edit</string>
     <string name="PLACEHOLDER">PLACEHOLDER</string>
+    <string name="noname">{No name}</string>
+    <string name="sync">Synchronise</string>
 </resources>

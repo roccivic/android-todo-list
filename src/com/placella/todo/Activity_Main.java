@@ -18,7 +18,6 @@ public class Activity_Main extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		LinearLayout l = new LinearLayout(self);
         l.setOrientation(LinearLayout.VERTICAL);
         l.setLayoutParams(
@@ -95,16 +94,31 @@ public class Activity_Main extends Activity {
 		if (mainList.size() > 0) {
 			Util.hr(l, this);
 			for (Item i : mainList) {
+				LinearLayout innerLayout = new LinearLayout(self);
+				innerLayout.setOrientation(LinearLayout.HORIZONTAL);
+				innerLayout.setTag(i.getId());
+
+				ImageView img = new ImageView(self);
+				if (i.getType() == Item.NOTE) {
+					img.setImageDrawable(getResources().getDrawable(R.drawable.ic_note));
+				} else {
+					img.setImageDrawable(getResources().getDrawable(R.drawable.ic_list));
+				}
+				LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(52, 52);
+				img.setLayoutParams(layoutParams);
+				img.setPadding(0, 10, 0, 10);
+				innerLayout.addView(img);
+				
 				TextView b = new TextView(this);
 				String name = i.getName();
 				if (name.length() == 0) {
-					name = "No name";
+					name = getResources().getString(R.string.noname);
 				}
 				b.setText(name);
 	            b.setTextSize(16);
 	            b.setPadding(0, 10, 0, 10);
-	            b.setTag(i.getId());
-	            b.setOnClickListener(new OnClickListener() {
+
+	            innerLayout.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View arg0) {
 						Item i = todo.find(arg0.getTag());
@@ -122,7 +136,8 @@ public class Activity_Main extends Activity {
 				        startActivityForResult(intent, REQUEST.EDIT);
 					}
 				});
-				l.addView(b);
+	            innerLayout.addView(b);
+	            l.addView(innerLayout);
 				Util.hr(l, this);
 			}
 		} else {
