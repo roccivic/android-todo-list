@@ -11,13 +11,13 @@ public class Util {
 		parent.addView(
 			ruler,
 			new ViewGroup.LayoutParams(
-				ViewGroup.LayoutParams.MATCH_PARENT, 2
+				ViewGroup.LayoutParams.MATCH_PARENT, 1
 			)
 		);
 	}
 	public static void defaultMenuHandler(Context context, MenuItem i) {
 		if (i.getItemId() == R.id.menu_about) {
-			new Dialog_Message(context, R.string.about).show();
+			new Dialog_Message(context, R.string.about_text).show();
 	    }
 	}
 }

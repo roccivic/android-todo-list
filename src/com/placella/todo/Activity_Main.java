@@ -2,8 +2,6 @@ package com.placella.todo;
 
 import java.util.List;
 
-import org.json.*;
-
 import android.os.*;
 import android.app.*;
 import android.content.DialogInterface;
@@ -83,7 +81,7 @@ public class Activity_Main extends Activity {
 	    	}
     	}
     }
-	
+    
 	public LinearLayout getList() {
 		TextView t;
 		List<Item> mainList = todo.getList();
@@ -171,7 +169,8 @@ public class Activity_Main extends Activity {
 	        intent.putExtras(b);
 	        startActivityForResult(intent, REQUEST.ADD);
         } else if (item.getItemId() == R.id.menu_sync) {
-        	new Dialog_Message(self, createJson()).show();
+    	    Toast.makeText(self, R.string.notify, Toast.LENGTH_SHORT).show();
+			Synchronise.start(self, todo.getList());
         } else {
         	Util.defaultMenuHandler(self, item);
         }
@@ -184,29 +183,7 @@ public class Activity_Main extends Activity {
     	this.todo.close();
     }
 	
-	public String createJson() {
-    	JSONArray root = new JSONArray();
-        try {
-        	for (Item i : todo.getList()) {
-                JSONObject itemObj = new JSONObject();
-                itemObj.put("name", i.getName());
-                itemObj.put("type", i.getType());
-                itemObj.put("note", i.getNotecontent());
-            	JSONArray array = new JSONArray();
-            	for (Item inner : i.getListcontent()) {
-                    JSONObject innerObj = new JSONObject();
-            		innerObj.put("txt", inner.getName());
-            		innerObj.put("sel", inner.getState());
-            		array.put(innerObj);
-            	}
-            	itemObj.put("list", array);
-            	root.put(itemObj);
-        	}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-        return root.toString();
-	}
+
     
     public void refresh() {
 	    LinearLayout l = (LinearLayout) findViewById(dataListId);
