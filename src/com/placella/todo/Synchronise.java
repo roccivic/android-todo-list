@@ -13,7 +13,6 @@ import org.apache.http.util.EntityUtils;
 import org.json.*;
 
 import android.app.*;
-import android.app.Notification.Builder;
 import android.content.*;
 import android.net.Uri;
 import android.os.Bundle;
@@ -35,10 +34,12 @@ public abstract class Synchronise {
 		).start();
 	}
 	
+	@SuppressWarnings("deprecation")
 	private static synchronized void request() {
-		boolean success = put(createJson(list), context);
-				
 		Intent intent;
+		PendingIntent pIntent;
+		Notification msg;
+		boolean success = put(createJson(list), context);
 		if (! success) {
 			intent = new Intent(context, Activity_Notification.class);
 	        Bundle b = new Bundle();
@@ -49,21 +50,36 @@ public abstract class Synchronise {
 			System.out.println(response);
 			intent = new Intent(Intent.ACTION_VIEW, Uri.parse(response));
 		}
-        PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent, 0);
-        Builder builder = new Notification.Builder(context);
+        pIntent = PendingIntent.getActivity(context, 0, intent, 0);
         if (success) {
-        	builder
-	            .setContentTitle(context.getResources().getString(R.string.sync_ok))
-	            .setContentText(context.getResources().getString(R.string.sync_ok_full)).setSmallIcon(R.drawable.ic_menu_about);
+    		msg = new Notification(
+	    		R.drawable.ic_menu_about,
+	    		context.getResources().getString(R.string.sync_ok_title),
+	    		System.currentTimeMillis()
+	        );
+        	msg.setLatestEventInfo(
+    			context,
+    			context.getResources().getString(R.string.sync_ok),
+    			context.getResources().getString(R.string.sync_ok_full),
+    			pIntent
+        	);
         } else {
-        	builder
-            	.setContentTitle(context.getResources().getString(R.string.sync_failed))
-	            .setContentText(context.getResources().getString(R.string.sync_failed_full)).setSmallIcon(R.drawable.ic_menu_about);
+    		msg = new Notification(
+	    		R.drawable.ic_menu_about,
+	    		context.getResources().getString(R.string.sync_failed_title),
+	    		System.currentTimeMillis()
+	        );
+        	msg.setLatestEventInfo(
+    			context,
+    			context.getResources().getString(R.string.sync_failed),
+    			context.getResources().getString(R.string.sync_failed_full),
+    			pIntent
+        	);
         }
-        Notification n = builder.setContentIntent(pIntent).build();
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        n.flags |= Notification.FLAG_AUTO_CANCEL;
-        notificationManager.notify(0, n);
+        msg.flags |= Notification.FLAG_AUTO_CANCEL;
+        msg.defaults |= Notification.DEFAULT_SOUND;
+        notificationManager.notify(0, msg);
 	}
 	
 	private static boolean put(String data, Context context) {

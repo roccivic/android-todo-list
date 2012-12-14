@@ -31,8 +31,10 @@
     <string name="PLACEHOLDER">PLACEHOLDER</string>
     <string name="sync_failed_full">Tap here to see why</string>
     <string name="sync_failed">Synchronisation Failed</string>
+    <string name="sync_failed_title">Synchronisation of \'To Do List\' failed</string>
     <string name="sync_ok_full">Tap here to get the link to your notes</string>
     <string name="sync_ok">Synchronisation Successful</string>
+    <string name="sync_ok_title">\'To Do List\' successfully synchronised</string>
     <string name="sync">Synchronise</string>
     <string name="title">Title</string>
     <string name="view">View</string>
